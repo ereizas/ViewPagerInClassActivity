@@ -11,9 +11,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainerView, TextFragment.newInstance("Hi"))
-            .commit()
+        val viewPager=findViewById<ViewPager2>(R.id.viewPager)
+        viewPager.adapter = object: FragmentStateAdapter(this){
+            override fun getItemCount()=10
+
+            override fun createFragment(position: Int)= TextFragment.newInstance("${position+1}")
+
+        }
     }
 
 }
